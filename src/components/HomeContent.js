@@ -9,8 +9,8 @@ export default function HomeContent() {
                     <div className="card-content">
                         <div className="content">
                             <h4>Energy conservation</h4>
-                            <p>Purus semper eget duis at tellus at urna condimentum mattis. Non blandit massa enim nec. Integer enim neque volutpat ac tincidunt vitae semper quis. Accumsan tortor posuere ac ut consequat semper viverra nam.</p>
-                            <p><a href="/">Learn more</a></p>
+                            <p>Green Store provides you the best environmental friendly technology that improves the energy conservation for houses and even up to factories that are willing to reduce their environmental effect</p>
+                            <p><a href="/products">Learn more</a></p>
                         </div>
                     </div>
                 </div>
@@ -20,9 +20,8 @@ export default function HomeContent() {
                     <div className="card-content">
                         <div className="content">
                             <h4>Water conservation</h4>
-                            <p>Ut venenatis tellus in metus vulputate. Amet consectetur adipiscing elit pellentesque. Sed arcu non odio euismod lacinia at quis risus. Faucibus turpis in eu mi bibendum neque egestas cmonsu songue. Phasellus vestibulum lorem
-                            sed risus.</p>
-                            <p><a href="/">Learn more</a></p>
+                            <p>Green Store provides solutions to water waste by IoT products that improve the monitoring of your resources</p>
+                            <p><a href="/products">Learn more</a></p>
                         </div>
                     </div>
                 </div>
@@ -32,8 +31,8 @@ export default function HomeContent() {
                      <div className="card-content">
                         <div className="content">
                             <h4>Solar energy</h4>
-                            <p>Imperdiet dui accumsan sit amet nulla facilisi morbi. Fusce ut placerat orci nulla pellentesque dignissim enim. Libero id faucibus nisl tincidunt eget nullam. Commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                            <p><a href="/">Learn more</a></p>
+                            <p>Green Store is all about being environmental friendly, and so we do support all of our customers that want to opt for solar energy as a source of power. We have the best solar panels and IoT devices in the market</p>
+                            <p><a href="/products">Learn more</a></p>
                         </div>
                     </div>
                 </div>

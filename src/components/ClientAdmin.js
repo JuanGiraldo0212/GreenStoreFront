@@ -7,10 +7,8 @@ export default class ClientAdmin extends Component {
 
   state = {
     newclient: { 
-      contactInformation: {
-        phone: "",
-        mail: ""
-      },
+      phone: "",
+      mail: "",
       id: "",
       firstName: "",
       deliveryAddress: "",
@@ -29,45 +27,22 @@ export default class ClientAdmin extends Component {
   handleAddclient = async (id, event) => {
     event.preventDefault();
     // add call to AWS API Gateway add client endpoint here
-    /*
-    {
-    "ContactInformation": {
-      "Phone": "test",
-      "Mail": "test"
-    },
-    "Id": "1144106075",
-    "FirstName": "Juan",
-    "DeliveryAddress": "test",
-    "LastName": "Giraldo",
-    "Receipts": [
-      {
-        "Quantity": 1,
-        "ProductName": "Solar Panel",
-        "Date": "test",
-        "Total": 5000
-      }
-    ]
-  }
-    */
+
     try {
       const params = {
-        "ContactInformation": {
-          "Phone": this.newclient.hone,
-          "Mail": this.newclient.mail
-        },
-        "Id": this.newclient.id,
-        "FirstName": this.newclient.firstName,
-        "DeliveryAddress": this.newclient.deliveryAddress,
-        "LastName": this.newclient.lastName,
-        "Receipts": this.newclient.receipts
+        phone: this.state.newclient.phone,
+        mail: this.state.newclient.mail,
+        id: this.state.newclient.id,
+        firstName: this.state.newclient.firstName,
+        deliveryAddress: this.state.newclient.deliveryAddress,
+        lastName: this.state.newclient.lastName,
+        receipts: this.state.newclient.receipts
       };
       await axios.post(`${config.api.invokeUrl}/clients`, params);
       this.setState({ clients: [...this.state.clients, this.state.newclient] });
       this.setState({ newclient: { 
-        contactInformation: {
-          phone: "",
-          mail: ""
-        },
+        phone: "",
+        mail: "",
         id: "",
         firstName: "",
         deliveryAddress: "",
@@ -84,28 +59,26 @@ export default class ClientAdmin extends Component {
     }
   }
 
-  handleUpdateclient = async (id,phone,mail,name,deladdress,lname) => {
+  handleUpdateclient = async (id,phoneEnt,mailEnt,nameEnt,deladdressEnt,lnameEnt) => {
     // add call to AWS API Gateway update client endpoint here
     try {
       const params = {
-        "ContactInformation": {
-          "Phone": this.newclient.hone,
-          "Mail": this.newclient.mail
-        },
-        "Id": this.newclient.id,
-        "FirstName": this.newclient.firstName,
-        "DeliveryAddress": this.newclient.deliveryAddress,
-        "LastName": this.newclient.lastName,
-        "Receipts": this.newclient.receipts
+        phone: this.state.newclient.phone,
+        mail: this.state.newclient.mail,
+        id: this.state.newclient.id,
+        firstName: this.state.newclient.firstName,
+        deliveryAddress: this.state.newclient.deliveryAddress,
+        lastName: this.state.newclient.lastName,
+        receipts: this.state.newclient.receipts
       };
       await axios.patch(`${config.api.invokeUrl}/clients`, params);
       const clientToUpdate = [...this.state.clients].find(client => client.id === id);
       const updatedclients = [...this.state.clients].filter(client => client.id !== id);
-      clientToUpdate.contactInformation.phone = phone;
-      clientToUpdate.contactInformation.mail = mail;
-      clientToUpdate.firstName = name;
-      clientToUpdate.deliveryAddress = deladdress;
-      clientToUpdate.lastName = lname;
+      clientToUpdate.Phone = phoneEnt;
+      clientToUpdate.Mail = mailEnt;
+      clientToUpdate.FirstName = nameEnt;
+      clientToUpdate.DeliveryAddress = deladdressEnt;
+      clientToUpdate.LastName = lnameEnt;
       updatedclients.push(clientToUpdate);
       this.setState({clients: updatedclients});
     }catch (err) {
@@ -132,6 +105,7 @@ export default class ClientAdmin extends Component {
       const res = await axios.get(`${config.api.invokeUrl}/clients`);
       const clients = res.data;
       this.setState({ clients: clients });
+      console.log(this.state.clients)
     } catch (err) {
       console.log(`An error has occurred: ${err}`);
     }
@@ -164,7 +138,7 @@ export default class ClientAdmin extends Component {
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter name"
-                        value={this.state.newclient.clientname}
+                        value={this.state.newclient.firstName}
                         onChange={this.onAddclientNameChange}
                       />
                     </div>
@@ -190,8 +164,8 @@ export default class ClientAdmin extends Component {
                       <input 
                         className="input is-medium"
                         type="text" 
-                        placeholder="Enter Phone Number"
-                        value={this.state.newclient.contactInformation.phone}
+                        placeholder="Enter Phone"
+                        value={this.state.newclient.phone}
                         onChange={this.onAddclientPhoneChange}
                       />
                     </div>
@@ -200,7 +174,7 @@ export default class ClientAdmin extends Component {
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter Mail"
-                        value={this.state.newclient.contactInformation.mail}
+                        value={this.state.newclient.mail}
                         onChange={this.onAddclientMailChange}
                       />
                     </div>
@@ -224,17 +198,18 @@ export default class ClientAdmin extends Component {
               <div className="column is-two-thirds">
                 <div className="tile is-ancestor">
                   <div className="tile is-4 is-parent  is-vertical">
-                    { 
-                      this.state.clients.map((client, index) => 
+                      {console.log(this.state.clients)}{ 
+                      this.state.clients.map((client) =>                         
                         <ClientItems
                           isAdmin={true}
                           handleUpdateclient={this.handleUpdateclient}
-                          name={client.firstName}
-                          lastName={client.lastName}
-                          id={client.id}
-                          contactInformation={client.contactInformation}
-                          deliveryAddress={client.deliveryAddress}
-                          key={client.id}
+                          name={client.FirstName}
+                          lastName={client.LastName}
+                          id={client.Id}
+                          phone={client.Phone}
+                          mail={client.Mail}
+                          deliveryAddress={client.DeliveryAddress}
+                          key={client.Id}
                         />)
                     }
                   </div>

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import axios from "axios";
+import ClientItems from './ClientItems';
 const config = require('../config.json');
 
 export default class clients extends Component {
@@ -40,13 +41,14 @@ export default class clients extends Component {
                     { 
                       this.state.clients && this.state.clients.length > 0
                       ? this.state.clients.map(client => 
-                      <client 
+                      <ClientItems 
                           name={client.firstName}
-                          lastName={client.lastName}
-                          id={client.id}
-                          contactInformation={client.contactInformation}
-                          deliveryAddress={client.deliveryAddress}
-                          key={client.id}
+                          lastName={client.LastName}
+                          id={client.Id}
+                          phone={client.Phone}
+                          mail={client.Mail}
+                          deliveryAddress={client.DeliveryAddress}
+                          key={client.Id}
                         />)
                       : <div className="tile notification is-warning">No clients available</div>
                     }

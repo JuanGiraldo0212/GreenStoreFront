@@ -8,6 +8,7 @@ export default class ProductAdmin extends Component {
     updatedproductname: this.props.name
   }
 
+
   handleProductEdit = event => {
     event.preventDefault();
     this.setState({ isEditMode: true });
@@ -55,7 +56,7 @@ export default class ProductAdmin extends Component {
             <p className="product-title">{ this.props.name }</p>
               <p className="product-id">id: { this.props.id }</p>
               <p className="product-id">Price: $ { this.props.price}</p>
-              <img src="panel.jpg"></img>
+              <img src={`${this.props.image}`}></img>
             </div>
             </div> 
         }

@@ -5,41 +5,32 @@ export default class ClientItems extends Component {
 
   state = {
     isEditMode: false,
-    updatedclientname: this.props.name,
-    contactInformation: {
-      phone: "",
-      mail: ""
-    },
-    id: "",
-    firstName: "",
-    deliveryAddress: "",
-    lastName: "",
-    receipts: [
-      {
-        quantity: 0,
-        productName: "",
-        date: "",
-        total: 0
-      }]
+    phone: this.props.phone,
+    mail: this.props.mail,
+    id: this.props.id,
+    firstName: this.props.name,
+    deliveryAddress: this.props.deliveryAddress,
+    lastName: this.props.lastName
   }
 
   handleClientEdit = event => {
     event.preventDefault();
+    console.log(this.props)
     this.setState({ isEditMode: true });
   }
 
   handleEditSave = event => {
     event.preventDefault();
     this.setState({ isEditMode: false });
-    this.props.handleUpdateclient(this.props.id, this.state.updatedclientname);
+    console.log(this.state)
+    this.props.handleUpdateclient(this.state.id,this.state.phone,this.state.mail,this.state.name, this.state.deliveryAddress,this.state.lastName);
   }
-  onAddProductNameChange = event => this.setState({ "updatedproductname": event.target.value });
-  //onAddclientPhoneChange = event => this.setState({ contactInformation, contactInformation.phone: event.target.value } });
-  //onAddclientMailChange = event => this.setState({ newclient: { ...this.state.newclient.contactInformation, mail: event.target.value } });
-  onAddclientNameChange = event => this.setState({ firstName: event.target.value });
-  onAddclientIdChange = event => this.setState({id: event.target.value });
-  onAddclientDeliveryAddressChange = event => this.setState({deliveryAddress: event.target.value });
-  onAddclientLastNameChange = event => this.setState({ lastName: event.target.value });
+  onAddclientMailChange = event => this.setState({ "mail": event.target.value } );
+  onAddclientNameChange = event => this.setState({ "firstName": event.target.value });
+  onAddclientIdChange = event => this.setState({"id": event.target.value });
+  onAddclientDeliveryAddressChange = event => this.setState({"deliveryAddress": event.target.value });
+  onAddclientLastNameChange = event => this.setState({ "lastName": event.target.value });
+  onAddclientPhoneChange = event => this.setState({ "phone": event.target.value } );
 
   render() {
     return (
@@ -47,7 +38,7 @@ export default class ClientItems extends Component {
         {
           this.props.isAdmin && 
           <Fragment>
-            <a href="/" onClick={this.handleclientEdit} className="client-edit-icon">
+            <a href="/admin" onClick={this.handleClientEdit} className="client-edit-icon">
               <FontAwesomeIcon icon="edit" />
             </a>
             {/* <button onClick={event => this.props.handleDeleteclient(this.props.id, event)} className="delete"></button>*/}
@@ -56,13 +47,13 @@ export default class ClientItems extends Component {
         {
           this.state.isEditMode 
           ? <div>
-              <p>Edit client name</p>
+              <p>Edit client</p>
               <div className="control">
                       <input 
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter name"
-                        value={this.state.newclient.clientname}
+                        value={this.state.firstName}
                         onChange={this.onAddclientNameChange}
                       />
                     </div>
@@ -71,7 +62,7 @@ export default class ClientItems extends Component {
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter Last Name"
-                        value={this.state.newclient.lastName}
+                        value={this.state.lastName}
                         onChange={this.onAddclientLastNameChange}
                       />
                     </div>
@@ -80,7 +71,7 @@ export default class ClientItems extends Component {
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter id"
-                        value={this.state.newclient.id}
+                        value={this.state.id}
                         onChange={this.onAddclientIdChange}
                       />
                     </div>
@@ -88,8 +79,8 @@ export default class ClientItems extends Component {
                       <input 
                         className="input is-medium"
                         type="text" 
-                        placeholder="Enter Phone Number"
-                        value={this.state.newclient.contactInformation.phone}
+                        placeholder="Enter Phone"
+                        value={this.state.phone}
                         onChange={this.onAddclientPhoneChange}
                       />
                     </div>
@@ -98,7 +89,7 @@ export default class ClientItems extends Component {
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter Mail"
-                        value={this.state.newclient.contactInformation.mail}
+                        value={this.state.mail}
                         onChange={this.onAddclientMailChange}
                       />
                     </div>
@@ -107,11 +98,10 @@ export default class ClientItems extends Component {
                         className="input is-medium"
                         type="text" 
                         placeholder="Enter Delivery Address"
-                        value={this.state.newclient.deliveryAddress}
+                        value={this.state.deliveryAddress}
                         onChange={this.onAddclientDeliveryAddressChange}
                       />
                     </div>
-              <p className="client-id">id: { this.props.id }</p>
               <button type="submit" 
                 className="button is-info is-small"
                 onClick={ this.handleEditSave }
@@ -119,11 +109,11 @@ export default class ClientItems extends Component {
             </div>
           : <div>
             <div>
-              <p className="client-id">id: { this.props.id }</p>
-              <p className="client-id">First Name: { this.props.firstName}</p>
+              <p className="client-id">Id: { this.props.id }</p>
+              <p className="client-id">First Name: { this.props.name}</p>
               <p className="client-id">Last Name: { this.props.lastName}</p>
-              {/*<p className="client-id">Phone: { this.props.contactInformation.phone}</p>
-              <p className="client-id">Mail: { this.props.contactInformation.mail}</p>*/}
+              <p className="client-id">Phone: { this.props.phone}</p>
+              <p className="client-id">Mail: { this.props.mail}</p>
               <p className="client-id">Delivery Address: { this.props.deliveryAddress}</p>
             </div>
             </div> 
