@@ -117,7 +117,6 @@ export default class ClientItems extends Component {
               <p className="client-id">Mail: { this.props.mail}</p>
               <p className="client-id">Delivery Address: { this.props.deliveryAddress}</p>
             </div>
-              <UploadS3></UploadS3>
             </div> 
         }
       </div>
