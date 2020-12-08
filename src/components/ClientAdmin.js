@@ -33,9 +33,9 @@ export default class ClientAdmin extends Component {
         phone: this.state.newclient.phone,
         mail: this.state.newclient.mail,
         id: this.state.newclient.id,
-        firstName: this.state.newclient.firstName,
-        deliveryAddress: this.state.newclient.deliveryAddress,
-        lastName: this.state.newclient.lastName,
+        first_name: this.state.newclient.firstName,
+        delivery_address: this.state.newclient.deliveryAddress,
+        last_name: this.state.newclient.lastName,
         receipts: this.state.newclient.receipts
       };
       await axios.post(`${config.api.invokeUrl}/clients`, params);
@@ -66,9 +66,9 @@ export default class ClientAdmin extends Component {
         phone: this.state.newclient.phone,
         mail: this.state.newclient.mail,
         id: this.state.newclient.id,
-        firstName: this.state.newclient.firstName,
-        deliveryAddress: this.state.newclient.deliveryAddress,
-        lastName: this.state.newclient.lastName,
+        first_name: this.state.newclient.firstName,
+        delivery_address: this.state.newclient.deliveryAddress,
+        last_name: this.state.newclient.lastName,
         receipts: this.state.newclient.receipts
       };
       await axios.patch(`${config.api.invokeUrl}/clients`, params);
