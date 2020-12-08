@@ -1,5 +1,6 @@
 import React, { Component, Fragment }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UploadS3 from './utility/UploadS3';
 
 export default class ClientItems extends Component {
 
@@ -116,6 +117,7 @@ export default class ClientItems extends Component {
               <p className="client-id">Mail: { this.props.mail}</p>
               <p className="client-id">Delivery Address: { this.props.deliveryAddress}</p>
             </div>
+              <UploadS3></UploadS3>
             </div> 
         }
       </div>
