@@ -42,7 +42,7 @@ export default class clients extends Component {
                       this.state.clients && this.state.clients.length > 0
                       ? this.state.clients.map(client => 
                       <ClientItems 
-                          name={client.firstName}
+                          name={client.FirstName}
                           lastName={client.LastName}
                           id={client.Id}
                           phone={client.Phone}
