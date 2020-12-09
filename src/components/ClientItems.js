@@ -12,7 +12,7 @@ export default class ClientItems extends Component {
     firstName: this.props.name,
     deliveryAddress: this.props.deliveryAddress,
     lastName: this.props.lastName,
-    receipts: this.props.receipts
+    receipts: this.props.receipts ? this.props.receipts : []
   }
 
   handleClientEdit = event => {
@@ -143,6 +143,11 @@ export default class ClientItems extends Component {
               <p className="client-id">Phone: { this.props.phone}</p>
               <p className="client-id">Mail: { this.props.mail}</p>
               <p className="client-id">Delivery Address: { this.props.deliveryAddress}</p>
+              <p className="client-id">Receipts:</p>
+                      {
+                      this.state.receipts.map((receipt) =>                         
+                      <input type="text" className="input is-small" value={receipt} readonly></input>)
+                      }   
             </div>
             </div> 
         }

@@ -49,6 +49,7 @@ export default class clients extends Component {
                           mail={client.Mail}
                           deliveryAddress={client.DeliveryAddress}
                           key={client.Id}
+                          receipts={client.Receipts}
                         />)
                       : <div className="tile notification is-warning">No clients available</div>
                     }
