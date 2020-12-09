@@ -13,13 +13,7 @@ export default class ClientAdmin extends Component {
       firstName: "",
       deliveryAddress: "",
       lastName: "",
-      receipts: [
-        {
-          quantity: 0,
-          productName: "",
-          date: "",
-          total: 0
-        }]
+      receipts: []
     },
     clients: []
   }
@@ -38,7 +32,8 @@ export default class ClientAdmin extends Component {
         last_name: this.state.newclient.lastName,
         receipts: this.state.newclient.receipts
       };
-      await axios.post(`${config.api.invokeUrl}/clients`, params);
+      console.log(params)
+      await axios.patch(`${config.api.invokeUrl}/clients`, params);
       this.setState({ clients: [...this.state.clients, this.state.newclient] });
       this.setState({ newclient: { 
         phone: "",
@@ -47,33 +42,30 @@ export default class ClientAdmin extends Component {
         firstName: "",
         deliveryAddress: "",
         lastName: "",
-        receipts: [
-          {
-            quantity: 0,
-            productName: "",
-            date: "",
-            total: 0
-          }]}});
+        receipts: []
+      }});
     }catch (err) {
       console.log(`An error has occurred: ${err}`);
     }
   }
 
-  handleUpdateclient = async (id,phoneEnt,mailEnt,nameEnt,deladdressEnt,lnameEnt) => {
+  handleUpdateclient = async (id,phoneEnt,mailEnt,nameEnt,deladdressEnt,lnameEnt,receipts) => {
     // add call to AWS API Gateway update client endpoint here
     try {
       const params = {
-        phone: this.state.newclient.phone,
-        mail: this.state.newclient.mail,
-        id: this.state.newclient.id,
-        first_name: this.state.newclient.firstName,
-        delivery_address: this.state.newclient.deliveryAddress,
-        last_name: this.state.newclient.lastName,
-        receipts: this.state.newclient.receipts
+        phone: phoneEnt,
+        mail: mailEnt,
+        id: id,
+        first_name: nameEnt,
+        delivery_address: deladdressEnt,
+        last_name: lnameEnt,
+        receipts: receipts
       };
+      console.log(params)
       await axios.patch(`${config.api.invokeUrl}/clients`, params);
       const clientToUpdate = [...this.state.clients].find(client => client.id === id);
       const updatedclients = [...this.state.clients].filter(client => client.id !== id);
+      console.log(clientToUpdate)
       clientToUpdate.Phone = phoneEnt;
       clientToUpdate.Mail = mailEnt;
       clientToUpdate.FirstName = nameEnt;
@@ -110,8 +102,8 @@ export default class ClientAdmin extends Component {
       console.log(`An error has occurred: ${err}`);
     }
   }
-  onAddclientPhoneChange = event => this.setState({ newclient: { ...this.state.newclient.contactInformation, phone: event.target.value } });
-  onAddclientMailChange = event => this.setState({ newclient: { ...this.state.newclient.contactInformation, mail: event.target.value } });
+  onAddclientPhoneChange = event => this.setState({ newclient: { ...this.state.newclient, phone: event.target.value } });
+  onAddclientMailChange = event => this.setState({ newclient: { ...this.state.newclient, mail: event.target.value } });
   onAddclientNameChange = event => this.setState({ newclient: { ...this.state.newclient, firstName: event.target.value } });
   onAddclientIdChange = event => this.setState({ newclient: { ...this.state.newclient, id: event.target.value } });
   onAddclientDeliveryAddressChange = event => this.setState({ newclient: { ...this.state.newclient, deliveryAddress: event.target.value } });
@@ -182,7 +174,7 @@ export default class ClientAdmin extends Component {
                       <input 
                         className="input is-medium"
                         type="text" 
-                        placeholder="Enter Delivery Address"
+                        placeholder="Enter Address"
                         value={this.state.newclient.deliveryAddress}
                         onChange={this.onAddclientDeliveryAddressChange}
                       />
@@ -209,6 +201,7 @@ export default class ClientAdmin extends Component {
                           phone={client.Phone}
                           mail={client.Mail}
                           deliveryAddress={client.DeliveryAddress}
+                          receipts={client.Receipts}
                           key={client.Id}
                         />)
                     }
