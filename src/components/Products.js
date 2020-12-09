@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Product from './Product';
+import Form from './Form'
 import axios from "axios";
 const config = require('../config.json');
 
@@ -7,7 +8,12 @@ export default class Products extends Component {
 
   state = {
     newproduct: null,
-    products: []
+    products: [],
+    form: false
+  }
+
+   changeForm(param) {
+    this.state.form = param
   }
 
   fetchProducts = async () => {
@@ -42,9 +48,13 @@ export default class Products extends Component {
                   <div className="tile is-4 is-parent  is-vertical">
                     { 
                       this.state.products && this.state.products.length > 0
-                      ? this.state.products.map(product => <Product name={product.Name} id={product.Id} price={product.Price} image={product.Image} key={product.Id} />)
+                      ? this.state.products.map(product => <Product name={product.Name} id={product.Id} price={product.Price} image={product.Image} key={product.Id} function={this.changeForm} /> )
                       : <div className="tile notification is-warning">No products available</div>
                     }
+                    
+                  </div>
+                  <div style={{float:"right"}}>
+                    {this.state.form ? <Form/>:<p></p>}
                   </div>
                 </div>
               </div>

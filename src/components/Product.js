@@ -1,11 +1,12 @@
 import React, { Component, Fragment }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Form from './Form'
 
 export default class ProductAdmin extends Component {
 
   state = {
     isEditMode: false,
-    updatedproductname: this.props.name
+    updatedproductname: this.props.name,
   }
 
 
@@ -56,8 +57,9 @@ export default class ProductAdmin extends Component {
             <p className="product-title">{ this.props.name }</p>
               <p className="product-id">id: { this.props.id }</p>
               <p className="product-id">Price: $ { this.props.price}</p>
-              <img src={`${this.props.image}`}></img>
+              <img src={`${this.props.image}`} style={{display: "block", marginLeft: "auto",marginRight: "auto"}}></img>
             </div>
+            <Form/>
             </div> 
         }
       </div>
